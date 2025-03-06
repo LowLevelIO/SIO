@@ -20,7 +20,7 @@ extern "C" {
 /**
 * @brief Common error codes for SIO functions
 */
-typedef enum {
+enum sio_error {
   /* General codes (0 to -19) */
   SIO_SUCCESS = 0,                  /**< Operation completed successfully */
   SIO_ERROR_GENERIC = -1,           /**< Generic error */
@@ -125,7 +125,9 @@ typedef enum {
   SIO_ERROR_SYS_INVALID = -97,      /**< Invalid system state */
   SIO_ERROR_SYS_DEVICE = -98,       /**< Device error */
   SIO_ERROR_SYS_NOTSUP = -99        /**< Not supported */
-} sio_error_t;
+};
+
+typedef enum sio_error sio_error_t;
 
 /**
 * @brief Convert error code to string
@@ -140,8 +142,10 @@ const char *sio_strerr(sio_error_t err);
 */
 #if defined(SIO_OS_WINDOWS)
   sio_error_t sio_win_error_to_sio_error(unsigned long error);
-#else /* POSIX */
+#elif defined(SIO_OS_POSIX) /* POSIX */
   sio_error_t sio_posix_error_to_sio_error(int error);
+#else
+  #error "Unsupported operating system"
 #endif
 
 /**
@@ -150,20 +154,6 @@ const char *sio_strerr(sio_error_t err);
 * @return sio_error_t Converted error code
 */
 sio_error_t sio_get_last_error(void); 
-
-/**
-* @brief Debug assertion macro
-* 
-* @param expr Expression to check
-* @param err Error code to return if expression is false
-* @return Expression result if true, error code as specified if false
-*/
-#ifdef NDEBUG
-  #define SIO_ASSERT_RET(expr, err) (expr)
-#else
-  #define SIO_ASSERT_RET(expr, err) \
-  ((expr) ? (expr) : (sio_set_last_error(err), (typeof(expr))0))
-#endif
 
 #ifdef __cplusplus
 }

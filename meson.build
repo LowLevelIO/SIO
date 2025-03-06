@@ -27,22 +27,42 @@ srcinc = include_directories('.')
 
 # Auxiliary Sources
 aux_sources = [
-  'src/aux/dir.c'
+  'src/aux/dir.c',
+  'src/aux/addr.c'
 ]
 
 # Global Sources
 global_sources = [
   'src/err.c',
-  'src/sio.c'
+  'src/buf.c',
+  'src/stream.c'
 ]
 
 # Stream Sources
+stream_sources = [
+  'src/stream/device.c',
+  'src/stream/file.c',
+  'src/stream/memory.c',
+  'src/stream/msgqueue.c',
+  'src/stream/pipe.c',
+  'src/stream/shared_memory.c',
+  'src/stream/signal.c',
+  'src/stream/sock.c',
+  'src/stream/terminal.c',
+  'src/stream/timer.c',
+  'src/stream/window.c'
+]
 
 # Context Sources
-
+context_sources = [
+  'src/context/epoll.c',
+  'src/context/io_uring.c',
+  'src/context/IOCP.c',
+  'src/context/kqueue.c'
+]
 
 # Combined source list
-sio_sources = global_sources + aux_sources
+sio_sources = global_sources + aux_sources + stream_sources + context_sources
 
 # Library
 sio_lib = library('sio',

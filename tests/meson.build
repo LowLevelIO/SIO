@@ -1,7 +1,7 @@
 # Testing build configuration
 
 test_programs = [
-
+  ['testaddr', 'aux_addr.c'],
 ]
 
 foreach example : test_programs

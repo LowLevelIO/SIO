@@ -38,9 +38,3 @@ custom_target('docs',
   build_by_default : false,
   install : false
 )
-
-# Install documentation if requested
-if get_option('install_docs')
-  install_subdir(meson.current_build_dir() / 'html',
-                 install_dir : get_option('datadir') / 'doc' / 'sio')
-endif

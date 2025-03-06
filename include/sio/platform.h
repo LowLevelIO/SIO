@@ -166,18 +166,4 @@
   #define SIO_IMPORT
 #endif
 
-/**
-* @brief Environment initialization/cleanup
-*/
-int sio_initialize(void);
-void sio_shutdown(void);
-
-/**
-* @brief Version information
-*/
-#define SIO_VERSION_MAJOR 0
-#define SIO_VERSION_MINOR 1
-#define SIO_VERSION_PATCH 0
-#define SIO_VERSION_STRING "0.1.0"
-
 #endif /* SIO_PLATFORM_H */
