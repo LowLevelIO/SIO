@@ -32,7 +32,7 @@ extern "C" {
   #include <netinet/in.h>
   #include <unistd.h>
 #else
-  #error "Unsupported operating system"
+  #error "addr.h - Unsupported operating system"
 #endif
 
 /**

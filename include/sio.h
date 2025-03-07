@@ -18,6 +18,6 @@
 
 #define SIO_INITALIZE_RAW_SOCK (1 << 0)
 
-sio_error_t sio_initialize(long flags);
-void sio_cleanup();
+SIO_EXPORT sio_error_t sio_initialize(long flags);
+SIO_EXPORT void sio_cleanup();
 

@@ -1,5 +1,5 @@
 /**
-* @file sio/aux/addr.c
+* @file src/aux/addr.c
 * @brief Implementation of the SIO address and DNS functionality
 * 
 * This file contains the implementation of functions for working with

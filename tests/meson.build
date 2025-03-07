@@ -2,6 +2,7 @@
 
 test_programs = [
   ['testaddr', 'aux_addr.c'],
+  ['testbuf', 'buf.c']
 ]
 
 foreach example : test_programs

@@ -57,7 +57,8 @@ enum sio_error {
   SIO_ERROR_FILE_MMAP = -31,        /**< Memory mapping error */
   SIO_ERROR_FILE_FORMAT = -32,      /**< Invalid file format */
   SIO_ERROR_FILE_LOOP = -33,        /**< Too many symbolic links */
-  
+  SIO_ERROR_FILE_INVLPATH = -34,    /**< Invalid Path */
+
   /* Network specific errors (-40 to -59) */
   SIO_ERROR_NET_CONN_REFUSED = -40, /**< Connection refused */
   SIO_ERROR_NET_CONN_ABORTED = -41, /**< Connection aborted */
@@ -135,15 +136,15 @@ typedef enum sio_error sio_error_t;
 * @param err Error code
 * @return const char* Error string
 */
-const char *sio_strerr(sio_error_t err);
+SIO_EXPORT const char *sio_strerr(sio_error_t err);
 
 /**
 * @brief Platform-specific error conversion functions
 */
 #if defined(SIO_OS_WINDOWS)
-  sio_error_t sio_win_error_to_sio_error(unsigned long error);
+  SIO_EXPORT sio_error_t sio_win_error_to_sio_error(unsigned long error);
 #elif defined(SIO_OS_POSIX) /* POSIX */
-  sio_error_t sio_posix_error_to_sio_error(int error);
+  SIO_EXPORT sio_error_t sio_posix_error_to_sio_error(int error);
 #else
   #error "Unsupported operating system"
 #endif
@@ -153,7 +154,7 @@ const char *sio_strerr(sio_error_t err);
 * 
 * @return sio_error_t Converted error code
 */
-sio_error_t sio_get_last_error(void); 
+SIO_EXPORT sio_error_t sio_get_last_error(void); 
 
 #ifdef __cplusplus
 }
