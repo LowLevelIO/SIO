@@ -7,14 +7,15 @@
 *   Files
 *   Sockets
 *   Pipe
-*   Terminal
-*   Window (optional depending on operating system as linux does not come with this functionality)
 *   Device
 *   Timer
 *   Signal
 *   Message Queue
 *   Shared Memory
-*   Memory
+*   Memory (sio_buffer_t)
+*   Terminal
+*   Window (optional depending on operating system as linux does not have this functionality)
+*   ...and any other interface that can be used as a stream
 *
 * @author zczxy
 * @version 0.1.0
