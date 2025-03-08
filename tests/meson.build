@@ -20,6 +20,7 @@ stream_test = executable('stream_test',
 # Add other existing tests
 test_programs = [
   ['testaddr', 'aux_addr.c'],
+  ['testthread', 'aux_thread.c'],
   ['testbuf', 'buf.c']
 ]
 

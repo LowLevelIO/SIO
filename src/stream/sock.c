@@ -325,13 +325,17 @@ sio_error_t sio_stream_open_socket_from_handle(sio_stream_t *stream, void *handl
 * @return sio_error_t SIO_SUCCESS or error code
 */
 sio_error_t sio_socket_accept(sio_stream_t *server_stream, sio_stream_t *client_stream, sio_addr_t *client_addr) {
-  if (!server_stream || !client_stream || 
-      (server_stream->type != SIO_STREAM_SOCKET && server_stream->type != SIO_STREAM_PSEUDO_SOCKET)) {
+  if (
+    !server_stream || !client_stream || 
+    (server_stream->type != SIO_STREAM_SOCKET && server_stream->type != SIO_STREAM_PSEUDO_SOCKET)
+  ) {
+    printf("Other problem    ");
     return SIO_ERROR_PARAM;
   }
   
   /* Check if the server socket is in listening mode */
   if (!(server_stream->flags & SIO_STREAM_SERVER)) {
+    printf("Not a server    ");
     return SIO_ERROR_PARAM;
   }
   

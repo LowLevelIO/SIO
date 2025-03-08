@@ -28,7 +28,8 @@ srcinc = include_directories('.')
 # Auxiliary Sources
 aux_sources = [
   'src/aux/fs.c',
-  'src/aux/addr.c'
+  'src/aux/addr.c',
+  'src/aux/thread.c'
 ]
 
 # Global Sources
