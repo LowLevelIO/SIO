@@ -81,7 +81,8 @@ enum sio_stream_flags {
   SIO_STREAM_BINARY     = (1 << 11),  /**< Binary mode (for files) */
   SIO_STREAM_MMAP       = (1 << 12),  /**< Use memory mapping if possible */
   SIO_STREAM_DIRECT     = (1 << 13),  /**< Direct I/O (bypass cache if possible) */
-  SIO_SERVER            = (1 << 14)   /**< Set the stream to be a host for other streams if applicable */
+  SIO_STREAM_SERVER     = (1 << 14),  /**< Set the stream to be a host for other streams if applicable */
+  SIO_STREAM_TCP        = (1 << 15)   /**< Set the stream to be a connection socket */
 };
 
 typedef enum sio_stream_flags sio_stream_flags_t;
@@ -176,7 +177,7 @@ typedef enum sio_stream_fflag sio_stream_fflag_t;
 /**
 * @brief Forward declaration of stream operation vtable
 */
-struct sio_iovec_t {
+typedef struct sio_iovec {
   #if defined(SIO_OS_WINDOWS)
     ULONG len;
     CHAR *buf;
@@ -184,7 +185,8 @@ struct sio_iovec_t {
     void  *iov_base;    /* Starting address */
     size_t iov_len;     /* Number of bytes to transfer */
   #endif
-}
+} sio_iovec_t;
+
 
 // forward declare see reference below
 struct sio_stream_ops;
@@ -677,6 +679,17 @@ SIO_EXPORT sio_error_t sio_file_lock(sio_stream_t *stream, uint64_t offset, uint
 */
 SIO_EXPORT sio_error_t sio_file_unlock(sio_stream_t *stream, uint64_t offset, uint64_t size);
 
+/* Socket-specific operations */
+/**
+* @brief Accept a new connection on a server socket
+* 
+* @param server_stream Server socket stream
+* @param client_stream Pointer to store the new client socket stream
+* @param client_addr Pointer to store the client address (can be NULL)
+* @return sio_error_t SIO_SUCCESS or error code
+*/
+SIO_EXPORT sio_error_t sio_socket_accept(sio_stream_t *server_stream, sio_stream_t *client_stream, sio_addr_t *client_addr);
+
 /* Terminal-specific operations */
 
 /**
@@ -746,21 +759,21 @@ SIO_EXPORT sio_error_t sio_terminal_clear(sio_stream_t *stream);
 * 
 * @return sio_stream_t* Standard input stream
 */
-SIO_EXPORT sio_stream_t* sio_stream_stdin(void);
+SIO_EXPORT sio_error_t sio_stream_stdin(sio_stream_t **stdin);
 
 /**
 * @brief Get standard output stream
 * 
 * @return sio_stream_t* Standard output stream
 */
-SIO_EXPORT sio_stream_t* sio_stream_stdout(void);
+SIO_EXPORT sio_error_t sio_stream_stdout(sio_stream_t **stdout);
 
 /**
 * @brief Get standard error stream
 * 
 * @return sio_stream_t* Standard error stream
 */
-SIO_EXPORT sio_stream_t* sio_stream_stderr(void);
+SIO_EXPORT sio_error_t sio_stream_stderr(sio_stream_t **stderr);
 
 #ifdef __cplusplus
 }

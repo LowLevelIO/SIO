@@ -33,6 +33,7 @@ aux_sources = [
 
 # Global Sources
 global_sources = [
+  'src/sio.c',
   'src/err.c',
   'src/buf.c',
   'src/stream.c'

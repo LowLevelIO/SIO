@@ -7,8 +7,7 @@
 * @author zczxy
 * @version 0.1.0
 */
-#include <sio/platform.h>
-#include <sio/err.h>
+#include <sio.h>
 
 sio_error_t sio_initialize(long conf) {
 #if defined(SIO_OS_WINDOW)
@@ -18,6 +17,7 @@ sio_error_t sio_initialize(long conf) {
       return sio_get_last_error();
   }
 #endif
+  (void)conf;
   return SIO_SUCCESS;
 }
 

@@ -18,6 +18,14 @@
 
 #define SIO_INITALIZE_RAW_SOCK (1 << 0)
 
+#include <sio/platform.h>
+#include <sio/err.h>
+#include <sio/buf.h>
+
+#include <sio/stream.h>
+
+#include <sio/aux/addr.h>
+
 SIO_EXPORT sio_error_t sio_initialize(long flags);
 SIO_EXPORT void sio_cleanup();
 
